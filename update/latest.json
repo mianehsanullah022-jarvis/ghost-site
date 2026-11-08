@@ -1,6 +1,6 @@
 {
- "versionCode": 43,
- "versionName": "1.0.43",
- "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=43",
- "notes": "Say 'play espresso' or 'open YouTube and play espresso': ghost now starts the video."
+ "versionCode": 44,
+ "versionName": "1.0.44",
+ "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=44",
+ "notes": "Fixed the blinking voice/mic notification. Hey Ghost is now one switch and works in and out of the app."
 }
