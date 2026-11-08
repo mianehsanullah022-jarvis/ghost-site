@@ -1,6 +1,6 @@
 {
- "versionCode": 41,
- "versionName": "1.0.41",
- "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=41",
- "notes": "Jarvis mode: say Hey Ghost even when the app is closed. Live talk: talk to ghost like a phone call, cut in any time, and it does jobs while talking."
+ "versionCode": 42,
+ "versionName": "1.0.42",
+ "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=42",
+ "notes": "Hey Ghost now works with the app closed: ghost has its own offline ear."
 }
