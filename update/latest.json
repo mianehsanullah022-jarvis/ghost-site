@@ -1,6 +1,6 @@
 {
- "versionCode": 42,
- "versionName": "1.0.42",
- "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=42",
- "notes": "Hey Ghost now works with the app closed: ghost has its own offline ear."
+ "versionCode": 43,
+ "versionName": "1.0.43",
+ "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=43",
+ "notes": "Say 'play espresso' or 'open YouTube and play espresso': ghost now starts the video."
 }
