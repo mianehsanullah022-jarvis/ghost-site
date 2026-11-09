@@ -127,10 +127,46 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
 .drawer a{font-size:42px;font-weight:900;letter-spacing:-.03em}
 .drawer button{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));font-family:var(--mono);font-size:12px;color:var(--mute)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* ---------- more motion ---------- */
+#prog{position:fixed;left:0;top:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#6d737d,#fff);z-index:60;pointer-events:none}
+.word .wd{display:inline-block;white-space:nowrap;background:inherit;-webkit-background-clip:text;background-clip:text}
+.word .ch{display:inline-block;background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(.45em) rotate(8deg);filter:blur(8px);transition:opacity .7s var(--ease),transform .9s var(--ease),filter .7s var(--ease)}
+.word.in .ch{opacity:1;transform:none;filter:none}
+[data-a]{opacity:0;transform:translateY(42px);transition:opacity .9s var(--ease),transform .9s var(--ease),border-color .3s;transition-delay:var(--d,0s)}
+[data-a="left"]{transform:translateX(-60px)}
+[data-a="scale"]{transform:translateY(34px) scale(.94)}
+[data-a].in{opacity:1;transform:none}
+.svc-row{position:relative}
+.svc-row::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:linear-gradient(90deg,var(--ink),transparent);transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease) .3s;opacity:.5}
+.svc-row.in::after{transform:scaleX(1)}
+.svc-row h3{transition:transform .5s var(--ease)}
+.svc-row:hover h3{transform:translateX(10px)}
+.svc-row:hover .k{color:var(--ink)}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.1),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+.card:hover::before{opacity:1}
+.card>*:not(.art){position:relative;z-index:1}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.stats div{border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.stats b{display:block;font-size:clamp(30px,3.4vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1;background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stats span{display:block;margin-top:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.marq{position:relative;z-index:2;overflow:hidden;border-block:1px solid var(--line);padding:20px 0;white-space:nowrap;background:rgba(5,6,7,.5)}
+.marq-in{display:inline-flex;animation:marq 30s linear infinite}
+.marq span{display:inline-block;padding-right:.45em;font-weight:900;font-size:clamp(28px,4.4vw,60px);letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1px rgba(242,244,247,.38);transform:skewX(var(--sk,0deg))}
+.marq span:nth-child(2n){color:var(--ink);-webkit-text-stroke:0}
+@keyframes marq{to{transform:translateX(-50%)}}
+.time{position:relative}
+.time::before{content:"";position:absolute;left:-1px;top:0;width:1px;height:calc(var(--p,0)*100%);background:linear-gradient(180deg,var(--ink),rgba(242,244,247,.4));box-shadow:0 0 12px rgba(255,255,255,.5)}
+.ev::before{background:var(--dim)!important;transition:background .4s,box-shadow .4s}
+.ev.lit::before{background:var(--ink)!important;box-shadow:0 0 0 5px var(--bg),0 0 20px 5px rgba(255,255,255,.45)!important}
+#cursor{position:fixed;left:-14px;top:-14px;width:28px;height:28px;border:1px solid rgba(242,244,247,.6);border-radius:50%;pointer-events:none;z-index:70;mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease),left .3s var(--ease),top .3s var(--ease),background .3s}
+#cursor.big{width:60px;height:60px;left:-30px;top:-30px;background:#fff;border-color:#fff}
+@media (max-width:560px){.stats{grid-template-columns:1fr 1fr 1fr;gap:8px}.stats div{padding:12px}}
+@media (prefers-reduced-motion:reduce){.marq-in{animation:none}[data-a],.word .ch{opacity:1!important;transform:none!important;filter:none!important}}
 </style>
 
 <canvas id="sky" aria-hidden="true"></canvas>
 <div class="vig"></div>
+<div id="prog" aria-hidden="true"></div>
 
 <div class="intro-ui" id="introUi" aria-hidden="true"><div id="halo"></div></div>
 <button class="skip" id="skip">SKIP INTRO</button>
@@ -159,6 +195,7 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
       <div class="glass">
         <p class="reveal" id="reveal">Hey, I'm <b>Ehsanullah</b>, founder of <b>Zoomies Studio</b> in Lahore. I build things that move: animated websites, online ordering that takes the work off WhatsApp, a point-of-sale system running in a real café, and <b>ghost</b>, an AI assistant for Android and Windows that you just talk to. Give me your idea, and I'll ship it end to end, from the first sketch to the live link.</p>
         <div class="facts"><span>LAHORE · PK</span><span>REMOTE · WORLDWIDE</span><span>TAKING NEW PROJECTS</span></div>
+        <div class="stats"><div><b data-count="4">0</b><span>Sample sites</span></div><div><b data-count="2">0</b><span>ghost apps</span></div><div><b data-count="100" data-suffix="%">0%</b><span>Animated</span></div></div>
       </div>
     </div>
   </section>
@@ -173,6 +210,8 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
       <div class="svc-row"><span class="k">AI + APPS</span><h3>Apps and AI assistants</h3><p>Android and Windows apps, voice assistants and small tools that do the boring work for you.</p></div>
     </div>
   </section>
+
+  <div class="marq" aria-hidden="true"><div class="marq-in"><span>ANIMATED WEBSITES ✦</span><span>ONLINE ORDERING ✦</span><span>POINT OF SALE ✦</span><span>AI ASSISTANTS ✦</span><span>ANIMATED WEBSITES ✦</span><span>ONLINE ORDERING ✦</span><span>POINT OF SALE ✦</span><span>AI ASSISTANTS ✦</span></div></div>
 
   <section class="gut" id="projects">
     <div class="eyebrow">Selected work</div>
@@ -460,6 +499,78 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
     title.style.opacity = 1 - h*.85; sub.style.opacity = sub.classList.contains('on') ? 1 - h : '';
   }
   addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // ---------- more motion: letters, reveals, counters, tilt, timeline, marquee, magnet, cursor ----------
+  var fine = matchMedia('(pointer:fine)').matches, all = function(q){ return Array.prototype.slice.call(document.querySelectorAll(q)); };
+  all('section .word').forEach(function(w){
+    var n = 0;
+    (function split(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(c){
+        if (c.nodeType !== 3){ split(c); return; }
+        var frag = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(function(part){
+          if (!part) return;
+          if (/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(' ')); return; }
+          var wd = document.createElement('span'); wd.className = 'wd';
+          part.split('').forEach(function(ch){ var s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.transitionDelay = (n++ * 45) + 'ms'; wd.appendChild(s); });
+          frag.appendChild(wd);
+        });
+        node.replaceChild(frag, c);
+      });
+    })(w);
+  });
+  function mark(q, kind, step){ all(q).forEach(function(el, i){ el.setAttribute('data-a', kind || ''); if (step) el.style.setProperty('--d', (i * step) + 's'); }); }
+  mark('section .eyebrow'); mark('#about .glass', 'scale'); mark('.svc-row', 'left', .1); mark('.proj .card', 'scale', .08);
+  mark('.ev', 'left', .12); mark('.contact .lead'); mark('.cta-row');
+  function count(el){
+    var to = +el.getAttribute('data-count'), suf = el.getAttribute('data-suffix') || '', t0 = performance.now();
+    (function step(now){ var k = Math.min(1, (now - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(to * e) + suf; if (k < 1) requestAnimationFrame(step); })(t0);
+  }
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target; el.classList.add('in'); io.unobserve(el);
+      if (el.hasAttribute('data-count')) count(el);
+      setTimeout(function(){ el.style.setProperty('--d', '0s'); }, 1800);
+    });
+  }, {threshold: .15, rootMargin: '0px 0px -8% 0px'}) : null;
+  all('[data-a], section .word, [data-count]').forEach(function(el){
+    if (reduce || !io){ el.classList.add('in'); if (el.hasAttribute('data-count')) el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || ''); }
+    else io.observe(el);
+  });
+  // cards lean toward the pointer, with a soft light under it
+  if (fine && !reduce) all('.proj .card').forEach(function(c){
+    c.addEventListener('pointermove', function(e){
+      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty('--mx', (x * 100) + '%'); c.style.setProperty('--my', (y * 100) + '%');
+      if (!c.classList.contains('in')) return;
+      c.style.transition = 'transform .12s linear, border-color .3s';
+      c.style.transform = 'perspective(900px) rotateX(' + ((.5 - y) * 7) + 'deg) rotateY(' + ((x - .5) * 9) + 'deg) translateY(-4px)';
+    });
+    c.addEventListener('pointerleave', function(){ c.style.transition = 'transform .6s cubic-bezier(.2,.8,.2,1), border-color .3s'; c.style.transform = ''; });
+  });
+  // buttons pull toward the pointer
+  if (fine && !reduce) all('.btn, .pillb, .round').forEach(function(b){
+    b.addEventListener('pointermove', function(e){ var r = b.getBoundingClientRect(); b.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * .25) + 'px,' + ((e.clientY - r.top - r.height / 2) * .35) + 'px)'; });
+    b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
+  });
+  // a ring that follows the pointer and grows over things you can click
+  if (fine && !reduce){
+    var ring = document.createElement('div'); ring.id = 'cursor'; ring.setAttribute('aria-hidden', 'true'); document.body.appendChild(ring);
+    var kx = -100, ky = -100, gx = -100, gy = -100;
+    addEventListener('pointermove', function(e){ gx = e.clientX; gy = e.clientY; ring.classList.toggle('big', !!(e.target.closest && e.target.closest('a,button'))); }, {passive: true});
+    (function follow(){ kx += (gx - kx) * .2; ky += (gy - ky) * .2; ring.style.transform = 'translate(' + kx + 'px,' + ky + 'px)'; requestAnimationFrame(follow); })();
+  }
+  // scroll progress, the timeline drawing itself, the strip leaning with scroll speed
+  var prog = $('prog'), tl = document.querySelector('.time'), evs = all('.ev'), marq = document.querySelector('.marq-in'), lastY = scrollY, vel = 0;
+  function more(){
+    var max = document.documentElement.scrollHeight - innerHeight;
+    prog.style.transform = 'scaleX(' + (max > 0 ? scrollY / max : 0) + ')';
+    var r = tl.getBoundingClientRect(); tl.style.setProperty('--p', Math.max(0, Math.min(1, (innerHeight * .62 - r.top) / r.height)));
+    evs.forEach(function(ev){ ev.classList.toggle('lit', ev.getBoundingClientRect().top < innerHeight * .62); });
+  }
+  addEventListener('scroll', more, {passive: true}); addEventListener('resize', more); more();
+  if (!reduce) (function lean(){ var v = scrollY - lastY; lastY = scrollY; vel += (v - vel) * .12; if (marq) marq.style.setProperty('--sk', Math.max(-14, Math.min(14, -vel * .5)).toFixed(2) + 'deg'); requestAnimationFrame(lean); })();
 
   // phone menu
   $('menuBtn').onclick = function(){ $('drawer').hidden = false; };
