@@ -160,8 +160,35 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
 .ev.lit::before{background:var(--ink)!important;box-shadow:0 0 0 5px var(--bg),0 0 20px 5px rgba(255,255,255,.45)!important}
 #cursor{position:fixed;left:-14px;top:-14px;width:28px;height:28px;border:1px solid rgba(242,244,247,.6);border-radius:50%;pointer-events:none;z-index:70;mix-blend-mode:difference;transition:width .3s var(--ease),height .3s var(--ease),left .3s var(--ease),top .3s var(--ease),background .3s}
 #cursor.big{width:60px;height:60px;left:-30px;top:-30px;background:#fff;border-color:#fff}
-@media (max-width:560px){.stats{grid-template-columns:1fr 1fr 1fr;gap:8px}.stats div{padding:12px}}
+@media (max-width:560px){.stats{grid-template-columns:1fr 1fr 1fr;gap:8px}.stats div{padding:12px 10px}.stats b{font-size:27px}.stats span{font-size:9.5px}}
+.word .ch{padding-bottom:.14em;margin-bottom:-.14em}
 @media (prefers-reduced-motion:reduce){.marq-in{animation:none}[data-a],.word .ch{opacity:1!important;transform:none!important;filter:none!important}}
+/* ---------- phone-friendly motion ---------- */
+.word{will-change:transform}
+.card .art{animation:floaty 5s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(2deg)}}
+.card::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.13),transparent);transform:skewX(-18deg);pointer-events:none;opacity:0}
+.card.focus{border-color:rgba(242,244,247,.32)}
+.card.focus::after{animation:shine 1.3s var(--ease) both}
+@keyframes shine{0%{left:-60%;opacity:1}100%{left:130%;opacity:1}}
+.svc-row.focus h3{transform:translateX(10px)}
+.svc-row.focus .k{color:var(--bg);background:var(--ink);border-radius:999px;padding:3px 9px;justify-self:start}
+.svc-row .k{transition:color .3s,background .3s;width:max-content}
+.svc-row.focus p{color:#c9ced5}
+.ev h3{transition:transform .5s var(--ease),color .4s}
+.ev:not(.lit) h3{color:var(--mute)}
+.stats div{position:relative;overflow:hidden;isolation:isolate}
+.stats div::before{content:"";position:absolute;inset:-60%;z-index:-2;background:conic-gradient(from 0deg,transparent 0 68%,rgba(255,255,255,.55) 80%,transparent 92%);animation:spin 4.5s linear infinite}
+.stats div:nth-child(2)::before{animation-delay:-1.5s}.stats div:nth-child(3)::before{animation-delay:-3s}
+.stats div::after{content:"";position:absolute;inset:1px;border-radius:15px;z-index:-1;background:#0f1013}
+@keyframes spin{to{transform:rotate(1turn)}}
+.contact .word.in .dim .ch{animation:wave 2.6s ease-in-out infinite;animation-delay:calc(1.2s + var(--i,0) * 90ms)}
+@keyframes wave{0%,55%,100%{transform:none}25%{transform:translateY(-.14em)}}
+.tap{position:fixed;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:1.5px solid rgba(242,244,247,.85);pointer-events:none;z-index:80;animation:tap .7s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes tap{to{transform:scale(9);opacity:0;border-width:.3px}}
+.spark{position:fixed;left:0;top:0;width:4px;height:4px;margin:-2px 0 0 -2px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px rgba(255,255,255,.7);pointer-events:none;z-index:80;animation:spark .75s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes spark{to{transform:translate(var(--sx),var(--sy)) scale(.2);opacity:0}}
+@media (prefers-reduced-motion:reduce){.card .art,.stats div::before,.contact .word.in .dim .ch{animation:none}}
 </style>
 
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -512,7 +539,7 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
           if (!part) return;
           if (/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(' ')); return; }
           var wd = document.createElement('span'); wd.className = 'wd';
-          part.split('').forEach(function(ch){ var s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.transitionDelay = (n++ * 45) + 'ms'; wd.appendChild(s); });
+          part.split('').forEach(function(ch){ var s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; s.style.setProperty('--i', n); s.style.transitionDelay = (n++ * 45) + 'ms'; wd.appendChild(s); });
           frag.appendChild(wd);
         });
         node.replaceChild(frag, c);
@@ -571,6 +598,34 @@ footer{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding-block:
   }
   addEventListener('scroll', more, {passive: true}); addEventListener('resize', more); more();
   if (!reduce) (function lean(){ var v = scrollY - lastY; lastY = scrollY; vel += (v - vel) * .12; if (marq) marq.style.setProperty('--sk', Math.max(-14, Math.min(14, -vel * .5)).toFixed(2) + 'deg'); requestAnimationFrame(lean); })();
+
+  // ---------- phone-friendly motion: what's in the middle of the screen lights up, titles drift, taps ripple ----------
+  var focusSets = [all('.svc-row'), all('.proj .card')], bigWords = all('section .word');
+  function centerFocus(){
+    var mid = innerHeight / 2;
+    focusSets.forEach(function(set){
+      var best = null, bd = Infinity;
+      set.forEach(function(el){ var r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return; var d = Math.abs(r.top + r.height / 2 - mid); if (d < bd){ bd = d; best = el; } });
+      set.forEach(function(el){ var on = el === best && bd < innerHeight * .32; if (on && !el.classList.contains('focus') && el.classList.contains('card')){ el.classList.remove('focus'); void el.offsetWidth; } el.classList.toggle('focus', on); });
+    });
+    if (!reduce) bigWords.forEach(function(w, i){
+      var r = w.getBoundingClientRect(); if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      var k = (r.top + r.height / 2 - mid) / innerHeight;   // -1..1 as it passes
+      w.style.transform = 'translateX(' + (k * (i % 2 ? -9 : 9)).toFixed(2) + 'vw)';
+    });
+  }
+  addEventListener('scroll', centerFocus, {passive: true}); addEventListener('resize', centerFocus); centerFocus();
+  if (!reduce) addEventListener('pointerdown', function(e){
+    if (e.button > 0) return;
+    var t = document.createElement('i'); t.className = 'tap'; t.style.left = e.clientX + 'px'; t.style.top = e.clientY + 'px';
+    document.body.appendChild(t); setTimeout(function(){ t.remove(); }, 800);
+    for (var i = 0; i < 8; i++){
+      var sp = document.createElement('i'), a = i / 8 * 6.283 + Math.random() * .4, d = 34 + Math.random() * 30;
+      sp.className = 'spark'; sp.style.left = e.clientX + 'px'; sp.style.top = e.clientY + 'px';
+      sp.style.setProperty('--sx', (Math.cos(a) * d).toFixed(1) + 'px'); sp.style.setProperty('--sy', (Math.sin(a) * d).toFixed(1) + 'px');
+      document.body.appendChild(sp); (function(n){ setTimeout(function(){ n.remove(); }, 800); })(sp);
+    }
+  }, {passive: true});
 
   // phone menu
   $('menuBtn').onclick = function(){ $('drawer').hidden = false; };
