@@ -1,6 +1,87 @@
 {
- "versionCode": 48,
- "versionName": "1.0.48",
- "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=48",
- "notes": "Founder card (Ehsanullah). ghost no longer reads out a line before answering. Hey Ghost download fixed. Smoother app."
+ "versionCode": 63,
+ "versionName": "1.0.63",
+ "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=63",
+ "notes": "New one-screen ghost for Windows. What's new screen, agent, WhatsApp, bill photos.",
+ "features": [
+  {
+   "icon": "🖥",
+   "title": "New ghost for your PC",
+   "text": "One screen: ghost stands in the middle and almost everything is one click around it. Money, files, emails, music, lock, screenshot and more.",
+   "try": "look at my screen and help",
+   "title_ro": "PC ka naya ghost",
+   "text_ro": "Ek hi screen: beech mein ghost, aur takreeban har kaam ek click par. Paisa, files, emails, gaane, lock, screenshot aur bohat kuch.",
+   "try_ro": "meri screen dekho aur madad karo"
+  },
+  {
+   "icon": "🧭",
+   "title": "One ask, many jobs",
+   "text": "Say several things at once. ghost makes a plan and does them one by one, and still asks before sending anything.",
+   "try": "add 500 for food and remind me at 9 to call Ali",
+   "title_ro": "Ek baat, kai kaam",
+   "text_ro": "Kai kaam ek saath bolo. ghost plan bana kar ek ek kar ke karta hai, aur bhejne se pehle poochta hai.",
+   "try_ro": "500 khane ka likho aur 9 baje Ali ko call yaad dilao"
+  },
+  {
+   "icon": "💬",
+   "title": "WhatsApp, read out loud",
+   "text": "ghost reads your new WhatsApp messages and replies for you after you say yes. Nothing is saved.",
+   "try": "read my messages",
+   "title_ro": "WhatsApp sun lo",
+   "text_ro": "ghost naye WhatsApp messages parh kar sunata hai aur aap ki haan ke baad jawab deta hai. Kuch save nahi hota.",
+   "try_ro": "read my messages"
+  },
+  {
+   "icon": "🧾",
+   "title": "Bill photo → money record",
+   "text": "Show ghost a bill. It reads the total and the shop, and adds it to your spending after you say yes.",
+   "try": "scan this bill",
+   "title_ro": "Bill ki photo → hisaab",
+   "text_ro": "Bill dikhayein. ghost total aur dukaan parh kar aap ki haan ke baad hisaab mein likh deta hai.",
+   "try_ro": "scan this bill"
+  },
+  {
+   "icon": "📄",
+   "title": "PDF, Word and Excel",
+   "text": "ghost makes files for you and reads the ones you give it. Phone: Downloads → ghost. PC: Documents → ghost.",
+   "try": "make an excel sheet of my expenses",
+   "title_ro": "PDF, Word aur Excel",
+   "text_ro": "ghost files bana deta hai aur aap ki files parh leta hai. Phone: Downloads → ghost. PC: Documents → ghost.",
+   "try_ro": "make an excel sheet of my expenses"
+  },
+  {
+   "icon": "✋",
+   "title": "More control",
+   "text": "Brightness, Do Not Disturb, silent, screenshot, lock, next song. With Ghost Hands: tap, type and scroll in any app.",
+   "try": "take a screenshot",
+   "title_ro": "Zyada control",
+   "text_ro": "Brightness, Do Not Disturb, silent, screenshot, lock, agla gaana. Ghost Hands se: kisi bhi app mein tap, type aur scroll.",
+   "try_ro": "take a screenshot"
+  },
+  {
+   "icon": "⭐",
+   "title": "Free, Pro and Business",
+   "text": "Pro and Business need no API key at all, and your PC uses the same plan. See ⚙️ → Plans.",
+   "try": "open the plans",
+   "title_ro": "Free, Pro aur Business",
+   "text_ro": "Pro aur Business mein API key ki zaroorat nahi, aur PC bhi wahi plan use karta hai. ⚙️ → Plans dekhein.",
+   "try_ro": "open the plans"
+  },
+  {
+   "icon": "💼",
+   "title": "ghost Business",
+   "text": "A spoken business report: emails, Instagram, projects and money. Reply to Instagram comments by voice.",
+   "try": "business report",
+   "title_ro": "ghost Business",
+   "text_ro": "Business report sunein: emails, Instagram, projects aur paisa. Instagram comments ka jawab awaz se.",
+   "try_ro": "business report"
+  },
+  {
+   "icon": "✨",
+   "title": "This update screen",
+   "text": "From now on every update shows you what's new, right here. See it again any time: ⚙️ → What's new.",
+   "title_ro": "Yeh update screen",
+   "text_ro": "Ab har update mein yahin dikhega kya naya hai. Dobara dekhna ho: ⚙️ → What's new."
+  }
+ ]
 }
