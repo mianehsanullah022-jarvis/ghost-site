@@ -1,9 +1,18 @@
 {
- "versionCode": 63,
- "versionName": "1.0.63",
- "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=63",
- "notes": "New one-screen ghost for Windows. What's new screen, agent, WhatsApp, bill photos.",
+ "versionCode": 67,
+ "versionName": "1.0.67",
+ "url": "https://mianehsanullah022-jarvis.github.io/ghost-site/update/ghost.apk?v=67",
+ "notes": "Safer ghost: other apps can't control ghost, keys never go into backups, big or broken files are stopped, the PC window is sealed, and the website got a phone menu and download section.",
  "features": [
+  {
+   "icon": "🛡",
+   "title": "ghost is locked tighter",
+   "text": "Other apps can't make ghost do things, backups never carry your keys, giant or broken files are stopped, and the PC window is sealed off from your computer.",
+   "try": "ghost doctor",
+   "title_ro": "ghost ab zyada mehfooz",
+   "text_ro": "Doosri apps ghost se kaam nahi karwa saktin, backup mein aap ki keys nahi jaatin, bohat bari ya kharab files ruk jaati hain, aur PC wali window computer se alag band hai.",
+   "try_ro": "ghost doctor"
+  },
   {
    "icon": "🖥",
    "title": "New ghost for your PC",
